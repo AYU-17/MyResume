@@ -39,17 +39,8 @@
               tech: ["React", "Node.js", "Socket.IO", "MySQL", "JWT"],
               github: "https://github.com/AYU-17/Socket.ly",
               demo: "#",
-              page: "chat"
+              page: "/projects/chat"
             },
-            // {
-            //   title: "Student Management System",
-            //   description: "Admin dashboard with CRUD operations, student handling, email integration and secure management system.",
-            //   image: "https://images.unsplash.com/photo-1552664730-d307ca884978",
-            //   tech: ["React", "Express", "MySQL", "Node.js"],
-            //   github: "#",
-            //   demo: "#",
-            //   page: "student-management"
-            // },
             {
               title: "Mustard Invoice Web App",
               description: "Business invoice platform with dynamic calculations, client management and payment tracking system.",
@@ -57,26 +48,35 @@
               tech: ["Ejs", "Node.js"],
               github: "https://github.com/AYU-17/Khata",
               demo: "#",
-              page: "invoice"
+              page: "/projects/invoice"
             },
             {
-              title: "sales-management-system ",
+              title: "Sales Management System",
               description: "A comprehensive sales management system for tracking leads, managing customer relationships, and analyzing sales performance.",
               image: "/assets/sales-management-system.png",
               tech: ["React", "Node.js", "MySQL", "Express", "JWT"],
               github: "https://github.com/AYU-17/sales-management-system",
               demo: "#",
-              page: "sales-management"
+              page: "/projects/sales-management"
             },
-            // {
-            //   title: "",
-            //   description: "",
-            //   image: "",
-            //   tech: [],
-            //   github: "#",
-            //   demo: "#",
-            //   page: ""
-            // }
+            {
+              title: "Student Management System",
+              description: "Admin dashboard with CRUD operations, student handling, email integration and secure management system.",
+              image: "https://images.unsplash.com/photo-1552664730-d307ca884978",
+              tech: ["React", "Express", "MySQL", "Node.js"],
+              github: "#",
+              demo: "#",
+              page: "/projects/student-management-system"
+            },
+            {
+              title: "Cine Wallet - Movie Ticket Booking App",
+              description: "User-friendly movie ticket booking application with real-time seat selection, secure payment integration, and personalized recommendations.",
+              image: "/assets/cine_wallet.png",
+              tech: ["React", "Node.js", "MySQL", "Express", "JWT"],
+              github: "https://github.com/AYU-17/Cine-Wallet",
+              demo: "#",
+              page: "/projects/cine-wallet"
+            }
           ];
         %>
         <% projects.forEach(function(project, index) { %>
@@ -104,7 +104,7 @@
                 </div>
 
                 <!-- Text Details -->
-                <div class="p-6 md:p-8">
+                <div class="p-3 md:p-8">
                   <h3 class="text-2xl font-bold mb-3 hover:text-cyan-300 transition-colors duration-300">
                     <%= project.title %>
                   </h3>
@@ -125,33 +125,34 @@
               </div>
 
               <!-- Action Buttons -->
-              <div class="p-6 md:p-8 pt-0 flex items-center gap-4">
+              <div class="p-6 pt-0 flex items-center gap-3 flex-wrap">
                 <a
                   href="<%= project.github %>"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center gap-1 px-3 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400 transition-all duration-300 hover:scale-[1.03]"
+                  class="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400 transition-all duration-300 hover:scale-[1.03] text-sm"
                 >
-                  <i class="fa-brands fa-github text-lg"></i>
-                  <span class="text-sm font-medium">GitHub</span>
+                  <i class="fa-brands fa-github text-base"></i>
+                  <span class="font-medium">GitHub</span>
                 </a>
 
+                <% if (project.demo !== '#') { %>
                 <a
                   href="<%= project.demo %>"
-                  class="flex items-center gap-1 px-3 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 hover:scale-105 transition-all duration-300 active:scale-95 shadow-md shadow-cyan-500/10"
+                  class="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 hover:scale-105 transition-all duration-300 active:scale-95 shadow-md shadow-cyan-500/10 text-sm"
                 >
-                  <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
-                  <span class="text-sm font-semibold">Live</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                  <span class="font-semibold">Live</span>
                 </a>
+                <% } %>
 
                 <a
                   href="<%= project.page %>"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400 transition-all duration-300 hover:scale-[1.03]"
+                  class="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-400 hover:bg-purple-500/10 transition-all duration-300 hover:scale-[1.03] text-sm <%= project.page === '#' ? 'opacity-40 cursor-not-allowed' : '' %>"
+                  <%= project.page === '#' ? '' : '' %>
                 >
-                  <i class="fa-brands fa-github text-lg"></i>
-                  <span class="text-sm font-medium">View</span>
+                  <i class="fa-solid fa-arrow-right text-xs"></i>
+                  <span class="font-medium">View Details</span>
                 </a>
               </div>
 

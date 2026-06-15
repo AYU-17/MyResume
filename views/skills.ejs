@@ -26,31 +26,283 @@
         <p class="text-gray-400 mt-6 max-w-2xl mx-auto leading-8">
           Modern technologies and tools used to build scalable, realtime, and production-level applications.
         </p>
+
+        <!-- Hint text -->
+        <p class="text-cyan-400/50 text-sm mt-3 animate-pulse">
+          <i class="fa-solid fa-hand-pointer mr-1"></i> Click on any skill tag to learn more
+        </p>
       </div>
 
       <!-- Skills Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         <% 
+          // ── Per-skill data: intro + project usage ──────────────────────────────
+          const skillDetails = {
+            "React": {
+              icon: "⚛️",
+              color: "from-cyan-400 to-blue-500",
+              intro: "React is a JavaScript library for building fast, component-based user interfaces. It uses a virtual DOM for efficient rendering and follows a declarative programming model.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Built the entire frontend UI — chat bubbles, sidebar with online users, message input, and real-time updates rendered via React state & Socket.IO events.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Developed dashboards, lead management tables, customer profile views and navigation — all as React components with dynamic data from the Express API.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "EJS": {
+              icon: "🖼️",
+              color: "from-yellow-400 to-orange-500",
+              intro: "EJS (Embedded JavaScript) is a simple server-side templating engine that lets you generate HTML with plain JavaScript. It's great for SSR (Server-Side Rendering) web apps.",
+              projects: [
+                {
+                  name: "Mustard Invoice App",
+                  emoji: "🧾",
+                  usage: "All pages — invoice list, create invoice, client dashboard — are rendered server-side using EJS templates with dynamic data passed from Express routes.",
+                  github: "https://github.com/AYU-17/Khata"
+                },
+                {
+                  name: "My Resume Portfolio",
+                  emoji: "🌐",
+                  usage: "This very portfolio site uses EJS for all pages — home, about, skills, projects, contact — rendered server-side with dynamic partials for navbar and footer.",
+                  github: "#"
+                }
+              ]
+            },
+            "Tailwind CSS": {
+              icon: "🎨",
+              color: "from-teal-400 to-cyan-500",
+              intro: "Tailwind CSS is a utility-first CSS framework that lets you build modern UIs directly in HTML using predefined classes. It enables rapid, consistent styling without writing custom CSS.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Used Tailwind for the entire chat UI — glassmorphism cards, responsive layout, hover animations, gradient buttons and dark theme design.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Styled all admin dashboard components — data tables, stat cards, charts wrapper, sidebar and modal dialogs — using Tailwind utility classes.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "JavaScript": {
+              icon: "🟨",
+              color: "from-yellow-300 to-yellow-500",
+              intro: "JavaScript is the core programming language of the web. It runs both in the browser (client-side) and on the server (Node.js), enabling dynamic and interactive web applications.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Wrote all client-side logic — Socket.IO event listeners, DOM manipulation for typing indicators, online user list updates, and message rendering.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Handled frontend form validations, dynamic table filtering, API fetch calls and chart data binding using vanilla JavaScript and React hooks.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "Node.js": {
+              icon: "🟢",
+              color: "from-green-400 to-emerald-600",
+              intro: "Node.js is a JavaScript runtime built on Chrome's V8 engine. It allows running JavaScript on the server-side and is known for its non-blocking, event-driven architecture perfect for real-time apps.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Node.js powers the entire backend — HTTP server, WebSocket layer (Socket.IO), user authentication, room management and MySQL queries.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Mustard Invoice App",
+                  emoji: "🧾",
+                  usage: "Node.js backend handles invoice CRUD, PDF generation logic, client data management and EJS rendering through Express routes.",
+                  github: "https://github.com/AYU-17/Khata"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "RESTful API server built on Node.js managing leads, customers, sales analytics with JWT middleware and MySQL queries.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "Express.js": {
+              icon: "🚂",
+              color: "from-gray-400 to-gray-600",
+              intro: "Express.js is a minimal and flexible Node.js web framework that provides routing, middleware support, and utilities for building web APIs and server-side applications quickly.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Express handles API routes for login, register, user fetch, message history — with JWT auth middleware protecting private endpoints.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Mustard Invoice App",
+                  emoji: "🧾",
+                  usage: "All invoice routes (create, list, view, delete) and client routes are built with Express, rendering EJS templates server-side.",
+                  github: "https://github.com/AYU-17/Khata"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Express REST API with separate routers for leads, customers, auth and reports — using middleware for validation, JWT checks, and error handling.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "Socket.IO": {
+              icon: "⚡",
+              color: "from-yellow-400 to-red-500",
+              intro: "Socket.IO is a library that enables real-time, bidirectional and event-based communication between the browser and server. It uses WebSockets under the hood with fallbacks for older browsers.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Core technology of the app — Socket.IO powers live message delivery, typing indicators, online/offline user status, and room join/leave events in real time.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                }
+              ]
+            },
+            "MongoDB": {
+              icon: "🍃",
+              color: "from-green-500 to-teal-600",
+              intro: "MongoDB is a NoSQL document database that stores data in flexible JSON-like documents. It's highly scalable, great for unstructured or rapidly changing data schemas.",
+              projects: [
+                {
+                  name: "Exploring in Learning Projects",
+                  emoji: "📚",
+                  usage: "Studied MongoDB's document model, aggregation pipelines and Mongoose ORM through practice projects — preparing to integrate it in upcoming apps.",
+                  github: "#"
+                }
+              ]
+            },
+            "MySQL": {
+              icon: "🐬",
+              color: "from-blue-400 to-blue-700",
+              intro: "MySQL is a powerful relational database management system. It uses structured tables and SQL queries, making it ideal for apps with complex relationships and consistent data schemas.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Stores users, messages, chat rooms and sessions. Relational schema ensures efficient joins for fetching user-room associations and message history.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Normalized MySQL schema for leads, customers, contacts, and sales pipeline — with stored queries for analytics and dashboard statistics.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "Git": {
+              icon: "🌿",
+              color: "from-orange-400 to-red-600",
+              intro: "Git is the industry-standard distributed version control system. It tracks code changes, enables branching & merging, and powers collaborative development on platforms like GitHub.",
+              projects: [
+                {
+                  name: "All Projects",
+                  emoji: "📁",
+                  usage: "Every project uses Git for version control — feature branches, commits with clear messages, and pushes to GitHub repositories for backup and portfolio showcase.",
+                  github: "https://github.com/AYU-17"
+                }
+              ]
+            },
+            "Postman": {
+              icon: "📮",
+              color: "from-orange-400 to-orange-600",
+              intro: "Postman is an API development and testing tool. It allows developers to send HTTP requests, inspect responses, write test scripts, and organize API collections for team use.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Tested all REST endpoints — register, login, user list, message history — before connecting the frontend, verifying JWT token flow and response formats.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Created Postman collections for all API routes — leads, customers, auth, reports — to validate request/response cycles and catch errors early.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            },
+            "Railway": {
+              icon: "🚉",
+              color: "from-purple-400 to-indigo-600",
+              intro: "Railway is a modern cloud deployment platform that makes it easy to deploy web apps, databases, and services directly from GitHub with zero-config setup and automatic builds.",
+              projects: [
+                {
+                  name: "Mustard Invoice App",
+                  emoji: "🧾",
+                  usage: "Deployed the Node.js + Express invoice app on Railway with environment variables for DB credentials, enabling live access from any browser.",
+                  github: "https://github.com/AYU-17/Khata"
+                }
+              ]
+            },
+            "Render": {
+              icon: "☁️",
+              color: "from-indigo-400 to-purple-600",
+              intro: "Render is a cloud platform for deploying full-stack apps, APIs, and static sites. It offers free tiers, automatic GitHub deploys, and managed databases with minimal configuration.",
+              projects: [
+                {
+                  name: "Chat Application",
+                  emoji: "💬",
+                  usage: "Deployed the Node.js chat server on Render — set up environment variables, configured build & start commands, and linked GitHub for auto-deployments.",
+                  github: "https://github.com/AYU-17/Socket.ly"
+                },
+                {
+                  name: "Sales Management System",
+                  emoji: "📊",
+                  usage: "Hosted the Express API on Render with MySQL integration, enabling live API access for the React frontend.",
+                  github: "https://github.com/AYU-17/sales-management-system"
+                }
+              ]
+            }
+          };
+
           const skillsData = [
             {
+              id: "frontend",
               title: "Frontend",
-              skills: ['React', "EJS", "Tailwind CSS", "JavaScript"],
-              example: "Built futuristic portfolio UI"
+              icon: "fa-solid fa-paintbrush",
+              color: "from-cyan-400 to-blue-500",
+              skills: ['React', 'EJS', 'Tailwind CSS', 'JavaScript']
             },
             {
+              id: "backend",
               title: "Backend",
-              skills: ["Node.js", "Express.js", "Socket.IO"],
-              example: "Used in Real-Time Chat App"
+              icon: "fa-solid fa-server",
+              color: "from-purple-400 to-pink-500",
+              skills: ["Node.js", "Express.js", "Socket.IO"]
             },
             {
+              id: "database",
               title: "Database",
-              skills: ["MongoDB", "MySQL"],
-              example: "Designed scalable database systems"
+              icon: "fa-solid fa-database",
+              color: "from-emerald-400 to-cyan-500",
+              skills: ["MongoDB", "MySQL", "PostgreSQL"]
             },
             {
+              id: "tools",
               title: "Tools & Others",
-              skills: ["Git", "Postman", "Railway", "Render"],
-              example: "Deployment & cloud integrations"
+              icon: "fa-solid fa-wrench",
+              color: "from-orange-400 to-red-500",
+              skills: ["Git", "Postman", "Railway", "Render"]
             }
           ];
         %>
@@ -67,25 +319,33 @@
             <!-- Card -->
             <div class="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 h-full hover:border-cyan-400/50 transition duration-500 flex flex-col justify-between">
               <div>
-                <!-- Card Title -->
-                <h3 class="text-2xl font-bold mb-6 text-white border-b border-white/5 pb-3">
-                  <%= card.title %>
-                </h3>
+                <!-- Card Icon + Title -->
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                  <div class="w-10 h-10 rounded-xl bg-gradient-to-br <%= card.color %> flex items-center justify-center shadow-lg">
+                    <i class="<%= card.icon %> text-white text-sm"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white"><%= card.title %></h3>
+                </div>
 
-                <!-- Skills Tags -->
+                <!-- Clickable Skill Tags -->
                 <div class="flex flex-wrap gap-2.5">
                   <% card.skills.forEach(function(skill) { %>
-                    <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 hover:border-cyan-400 hover:text-cyan-300 transition duration-300">
+                    <button
+                      onclick="openSkillPopup('<%= skill %>')"
+                      class="skill-tag px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 hover:border-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+                    >
+                      <i class="fa-solid fa-circle-info text-[9px] opacity-50"></i>
                       <%= skill %>
-                    </span>
+                    </button>
                   <% }); %>
                 </div>
               </div>
 
               <!-- Example Box -->
-              <div class="mt-8 p-4 rounded-2xl bg-black/30 border border-cyan-500/10">
-                <p class="text-xs text-gray-400 mb-1">Project Usage</p>
-                <p class="text-cyan-300 text-sm font-medium"><%= card.example %></p>
+              <div class="mt-6 text-gray-400 text-sm bg-white/5 border border-white/10 rounded-2xl p-4">
+                <p class="text-white text-sm">
+                  Click on any skill tag to view its details.
+                </p>
               </div>
             </div>
           </div>
@@ -95,5 +355,132 @@
     </div>
   </section>
 </div>
+
+<!-- ==================== SKILL DETAIL MODAL ==================== -->
+<div id="skillModal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 hidden" onclick="closeModalOutside(event)">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+  <!-- Modal Box -->
+  <div id="modalBox" class="relative bg-[#0f172a] border border-white/10 rounded-3xl w-full max-w-xl max-h-[88vh] overflow-y-auto shadow-2xl shadow-cyan-500/10 transform transition-all duration-300 scale-95 opacity-0">
+    
+    <!-- Modal Header -->
+    <div class="sticky top-0 z-10 bg-[#0f172a]/95 backdrop-blur-xl border-b border-white/10 p-6 rounded-t-3xl">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <!-- Skill Emoji -->
+          <div id="modalEmoji" class="text-4xl"></div>
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-widest mb-0.5">Skill Overview</p>
+            <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
+          </div>
+        </div>
+        <button onclick="closeSkillModal()" class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:border-red-400 hover:bg-red-500/10 flex items-center justify-center transition-all duration-300 hover:rotate-90 flex-shrink-0">
+          <i class="fa-solid fa-xmark text-gray-300"></i>
+        </button>
+      </div>
+
+      
+    </div>
+
+    <!-- Modal Content -->
+    <div class="p-6 space-y-6">
+
+      <!-- Introduction -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <i class="fa-solid fa-book-open text-cyan-400 text-sm"></i>
+          <p class="text-sm font-semibold text-white uppercase tracking-wider">What is it?</p>
+        </div>
+        <p id="modalIntro" class="text-gray-400 text-sm leading-7 bg-white/5 border border-white/10 rounded-2xl p-4"></p>
+      </div>
+
+      <!-- Projects where used -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <i class="fa-solid fa-folder-open text-purple-400 text-sm"></i>
+          <p class="text-sm font-semibold text-white uppercase tracking-wider">Where I Used It</p>
+        </div>
+        <div id="modalProjects" class="space-y-4"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCRIPT ==================== -->
+<script>
+  const skillDetails = <%- JSON.stringify(skillDetails) %>;
+
+  function openSkillPopup(skillName) {
+    const data = skillDetails[skillName];
+    if (!data) return;
+
+    // Header
+    document.getElementById('modalEmoji').textContent = data.icon;
+    document.getElementById('modalTitle').textContent = skillName;
+
+    // Intro
+    document.getElementById('modalIntro').textContent = data.intro;
+
+    // Projects
+    const container = document.getElementById('modalProjects');
+    container.innerHTML = '';
+
+    data.projects.forEach(function(proj) {
+      const card = document.createElement('div');
+      card.className = 'bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-cyan-400/30 transition-all duration-300';
+      card.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="text-2xl flex-shrink-0">${proj.emoji}</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-white font-semibold text-sm mb-2">${proj.name}</h4>
+            <p class="text-gray-400 text-sm leading-6 mb-3">${proj.usage}</p>
+            ${proj.github !== '#' ? `
+            <a href="${proj.github}" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400 text-xs font-medium text-gray-300 hover:text-cyan-300 transition-all duration-300 hover:scale-105">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>` : ''}
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Show modal
+    const modal = document.getElementById('skillModal');
+    const box   = document.getElementById('modalBox');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        box.classList.remove('scale-95', 'opacity-0');
+        box.classList.add('scale-100', 'opacity-100');
+      });
+    });
+  }
+
+  function closeSkillModal() {
+    const modal = document.getElementById('skillModal');
+    const box   = document.getElementById('modalBox');
+    box.classList.remove('scale-100', 'opacity-100');
+    box.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  function closeModalOutside(event) {
+    if (event.target === document.getElementById('skillModal')) {
+      closeSkillModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSkillModal();
+  });
+</script>
 
 <%- include('partials/footer') %>

@@ -54,13 +54,12 @@
           <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-12">
             <% 
               const stats = [
-                { number: "3+", label: "Projects" },
-                { number: "5+", label: "Technologies" },
-                { number: "100+", label: "Coding Hours" }
+                { number: "5+", label: "Projects", link: "/projects" },
+                { number: "10+", label: "Technologies", link: "/skills" },
               ];
             %>
             <% stats.forEach(function(item) { %>
-              <div class="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/40">
+              <div onclick="window.location.href='<%= item.link %>'" class="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400/40">
                 <h3 class="text-2xl sm:text-3xl font-bold text-cyan-400">
                   <%= item.number %>
                 </h3>
@@ -70,7 +69,6 @@
               </div>
             <% }); %>
           </div>
-
         </div>
 
       </div>
