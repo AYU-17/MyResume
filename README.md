@@ -110,6 +110,34 @@ By default, the server will run on: [http://localhost:5000](http://localhost:500
     ```json
     {
       "success": true,
-      "message": "Thank you! Your message has been saved successfully."
+      "message": "Thank you! Your message has been saved successfully. I will reply by email or WhatsApp soon."
     }
-    ```
+  ```
+
+---
+
+## ✉️ Contact Form Notifications
+
+The contact form now saves messages to MongoDB and can send an email notification if SMTP settings are configured.
+
+### Required environment variables
+```env
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+EMAIL_USER=your@gmail.com
+EMAIL_PASS=your-email-app-password
+```
+
+### Optional environment variables
+```env
+EMAIL_SECURE=true
+EMAIL_TO=ayushmittal844@gmail.com
+```
+
+> Use a Gmail app password or another SMTP account for `EMAIL_PASS`.
+
+## 📦 Should `public/assets` be uploaded?
+
+Yes. `public/assets/` contains the website's static images, icons, and other required files. These should be committed to the repository so the site renders correctly.
+
+Only ignore files that are generated or sensitive, such as `node_modules/`, `.env`, and local editor or OS files.
